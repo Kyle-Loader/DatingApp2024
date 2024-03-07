@@ -1,0 +1,8 @@
+<h1>{{title}}</h1>
+
+<ul>
+    <li *ngFor="let user of users">
+        <!--Remember that JSON is returned in Angular, which results in CamelCase being use-->
+        {{user.id}} - {{user.userName}}
+    </li>
+</ul>
