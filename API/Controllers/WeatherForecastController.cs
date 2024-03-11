@@ -2,10 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;
 
-[ApiController]
-//This route is used by the API to know where to listen for API requests. This still works the same as MVC where it listens to WeatherForecast without the controller part.
-[Route("[controller]")]
-public class WeatherForecastController : ControllerBase
+
+public class WeatherForecastController : BaseApiController
 {
     private static readonly string[] Summaries = new[]
     {
