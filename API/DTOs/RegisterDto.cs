@@ -1,13 +1,18 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace API.DTOs;
-
-//This is a Data Transfer Object, this object encapsulates data, and sends it from one subsystem to another. In this case it is from the API to the Client.
-public class RegisterDto
+namespace API.DTOs
 {
-    [Required]
-    public string Username { get; set; }
-    [Required]
-    [StringLength(8, MinimumLength = 4)]
-    public string Password { get; set; }
+    public class RegisterDto
+    {
+        [Required] public string Username { get; set; }
+        [Required] public string KnownAs { get; set; }
+        [Required] public string Gender { get; set; }
+        [Required] public DateOnly? DateOfBirth { get; set; } // optional to make required work!
+        [Required] public string City { get; set; }
+        [Required] public string Country { get; set; }
+
+        [Required]
+        [StringLength(8, MinimumLength = 4)]
+        public string Password { get; set; } 
+    }
 }
