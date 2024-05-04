@@ -6,6 +6,6 @@ namespace API.Interfaces
     //The token allows for authentication without any database calls.
     public interface ITokenService
     {
-        string CreateToken(AppUser user);
+        Task<string> CreateToken(AppUser user);
     }
 }
