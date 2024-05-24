@@ -1,6 +1,7 @@
 ﻿using API.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -9,10 +10,12 @@ namespace API.Controllers
     public class AdminController: BaseApiController
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly RoleManager<AppRole> _roleManager;
 
-        public AdminController(UserManager<AppUser> userManager)
+        public AdminController(UserManager<AppUser> userManager, RoleManager<AppRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
         }
 
         [Authorize(Policy = "RequireAdminRole")]
@@ -57,6 +60,12 @@ namespace API.Controllers
             return Ok(await _userManager.GetRolesAsync(user));
         }
 
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpGet("get-available-roles")]
+        public async Task<List<string>> GetAvailableRoles ()
+        {
+            return await _roleManager.Roles.Select(x => x.Name).ToListAsync();
+        }
 
         [Authorize(Policy = "ModeratePhotoRole")]
         [HttpGet("photos-to-moderate")]

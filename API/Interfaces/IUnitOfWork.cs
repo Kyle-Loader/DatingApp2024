@@ -5,6 +5,7 @@
         IUserRepository UserRepository {get; }
         IMessageRepository MessageRepository {get; }
         ILikesRepository LikesRepository {get; }
+        IVisitsRepository VisitsRepository{get;}
 
         Task<bool> Complete();
 

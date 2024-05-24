@@ -3,6 +3,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 import { Member } from 'src/app/_models/member';
 import { MembersService } from 'src/app/_services/members.service';
 import { PresenceService } from 'src/app/_services/presence.service';
+import { VipService } from 'src/app/_services/vip.service';
 
 @Component({
   selector: 'app-member-card',
@@ -12,15 +13,18 @@ import { PresenceService } from 'src/app/_services/presence.service';
 export class MemberCardComponent implements OnInit {
   @Input() member : Member | undefined;
 
-  constructor(private memberService: MembersService, private toastr: ToastrService, public presenceService: PresenceService) { }
+  constructor(private memberService: MembersService, private toastr: ToastrService, public presenceService: PresenceService, private vipService: VipService) { }
 
   ngOnInit(): void {
-    
   }
 
   addLike(member: Member){
     this.memberService.addLike(member.userName).subscribe({
       next: () => this.toastr.success(`You have liked ${member.knownAs}`)
     })
+  }
+
+  addVisit(member: Member){
+    this.vipService.addVisit(member.userName).subscribe({});
   }
 }

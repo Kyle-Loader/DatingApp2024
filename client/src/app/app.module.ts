@@ -36,6 +36,7 @@ import { RolesModalComponent } from './modals/roles-modal/roles-modal.component'
 import { RouteReuseStrategy } from '@angular/router';
 import { CustomRouteReuseStrategy } from './_services/customRouteReuseStrategy';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
+import { VisitsComponent } from './vip/visits/visits.component';
 
 @NgModule({
   //Any new components are added into the declarations section
@@ -61,6 +62,7 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
     PhotoManagementComponent,
     RolesModalComponent,
     ConfirmDialogComponent,
+    VisitsComponent,
   ],
   //The imports section is to add custom modules and angular modules into the project
   imports: [

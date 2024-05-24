@@ -24,4 +24,7 @@ public class AppUser : IdentityUser<int>
         public List<Message> MessagesReceived { get; set; }
 
         public List<AppUserRole> UserRoles { get; set; }
+
+        public List<UserVisit> VisitedUsers { get; set; }
+        public List<UserVisit> UsersVisitedBy { get; set; }
     }

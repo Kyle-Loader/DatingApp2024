@@ -13,6 +13,7 @@ import { PresenceService } from 'src/app/_services/presence.service';
 import { AccountService } from 'src/app/_services/account.service';
 import { User } from 'src/app/_models/user';
 import { take } from 'rxjs';
+import { VipService } from 'src/app/_services/vip.service';
 
 
 @Component({
@@ -30,7 +31,7 @@ export class MemberDetailComponent implements OnInit, OnDestroy{
   messages: Message[] = [];
   user? : User;
   
-  constructor(private accountService: AccountService, private route: ActivatedRoute, private messageService: MessageService,  public presenceService: PresenceService) {
+  constructor(private accountService: AccountService, private route: ActivatedRoute, private messageService: MessageService,  public presenceService: PresenceService, public vipService: VipService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => {
         if(user) this.user = user;
@@ -50,6 +51,9 @@ export class MemberDetailComponent implements OnInit, OnDestroy{
       });
       
       this.getImages();
+
+      if (!this.user) return;
+        this.vipService.addVisit(this.user.username);
     }
     
     ngOnDestroy(): void {

@@ -1,9 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, Input,OnInit, ViewChild } from '@angular/core';
-import { Message } from 'src/app/_models/message';
-import { TimeagoClock, TimeagoModule } from 'ngx-timeago';
+import { TimeagoModule } from 'ngx-timeago';
 import { MessageService } from 'src/app/_services/message.service';
 import { FormsModule, NgForm } from '@angular/forms';
+import { take } from 'rxjs';
+import { VipService } from 'src/app/_services/vip.service';
+import { AccountService } from 'src/app/_services/account.service';
+import { User } from 'src/app/_models/user';
 
 @Component({
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -19,12 +22,13 @@ export class MemberMessagesComponent implements OnInit{
   messageContent = "";
   loading = false;
 
-  constructor(public messageService: MessageService){
-
-  }
+  constructor(public messageService: MessageService, private vipService: VipService){  }
 
   ngOnInit(): void {
-
+    if (!this.username){
+      return
+    };
+      this.vipService.addVisit(this.username);
   }
 
   sendMessage() {

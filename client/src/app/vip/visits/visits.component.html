@@ -1,0 +1,58 @@
+<div *ngIf="visitParams">
+  <div class="text-center mt-3">
+      <h2>{{visitParams.predicate  === 'visited' ? 'Members I visited' : 'Members who visited me'}}</h2>
+  </div>
+
+  <div class="container mt-3">
+      <button (click)="resetFilters()" class="btn btn-info mb-1" type="submit">Reset Filters</button>
+      <div class="col">
+        <div class="btn-group float-end" name="orderBy">
+          <button
+            class="btn btn-primary"
+            btnRadio="All"
+            [(ngModel)]="visitParams.orderBy"
+            (click)="loadVisits()">All visits</button>
+        
+          <button
+            class="btn btn-primary"
+            btnRadio="pastMonth"
+            [(ngModel)]="visitParams.orderBy"
+            (click)="loadVisits()">Visits in the past month</button>
+        </div>
+      </div>
+      <div class="d-flex">
+          <div class="btn-group" name="predicate">
+              <button class="btn btn-primary" 
+                  btnRadio="visited"
+                  [(ngModel)]="visitParams.predicate" 
+                  (click)="loadVisits()" >Members I visited</button>
+              <button class="btn btn-primary" 
+                  btnRadio="visitedby"
+                  [(ngModel)]="visitParams.predicate" 
+                  (click)="loadVisits()" >Members who visited me</button>
+          </div>
+      </div>
+
+      <div class="row mt-3">
+          <div class="col-2" *ngFor="let member of members">
+              <app-member-card [member]="member"></app-member-card>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+<div class="d-flex justify-content-center" *ngIf="pagination">
+    <pagination
+      [boundaryLinks]="true"
+      [totalItems]="pagination.totalItems"
+      [itemsPerPage]="pagination.itemsPerPage"
+      [maxSize]="10"
+      [(ngModel)]="pagination.currentPage"
+      (pageChanged)="pageChanged($event)"
+      previousText="&lsaquo;"
+      nextText="&rsaquo;"
+      firstText="&laquo;"
+      lastText="&raquo;">
+    </pagination>
+</div>
